@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 import androidx.compose.ui.platform.LocalContext
-import com.gfn.flashcards.DatabaseManipulator
 
 @Composable
 fun NewCard(){
@@ -76,26 +75,35 @@ fun NewCard(){
                 databaseService.onCreate(db)
 
                 // Add a sample course
-                databaseService.addCourse(
+                databaseService.addCard(
                     db,
-                    "Sample Course",
-                    "10 hours",
-                    "Introduction to programming",
-                    "Programming Basics"
+                    "Card 1",
+                    "Card 1",
+                    "Card 1",
+                    "Card 1",
+                    "Card 1",
+                    "DefaultCardDeck",
                 )
 
                 // Retrieve the data from the database
-                val cursor = db.rawQuery("SELECT * FROM mycourses", null)
+                val cursor = db.rawQuery("SELECT * FROM cards", null)
 
                 val data = buildString {
                     while (cursor.moveToNext()) {
-                        val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
-                        val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
-                        val duration = cursor.getString(cursor.getColumnIndexOrThrow("duration"))
-                        val description = cursor.getString(cursor.getColumnIndexOrThrow("description"))
-                        val tracks = cursor.getString(cursor.getColumnIndexOrThrow("tracks"))
+                        val id = cursor.getInt(cursor.getColumnIndexOrThrow("card_id"))
+                        val questionTitle = cursor.getString(cursor.getColumnIndexOrThrow("question_title"))
+                        val questionBody = cursor.getString(cursor.getColumnIndexOrThrow("question_body"))
+                        val hint = cursor.getString(cursor.getColumnIndexOrThrow("hint"))
+                        val answerTitle = cursor.getString(cursor.getColumnIndexOrThrow("answer_title"))
+                        val answerBody = cursor.getString(cursor.getColumnIndexOrThrow("answer_body"))
+                        val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
 
-                        append("ID: $id, Name: $name, Duration: $duration, Description: $description, Tracks: $tracks\n")
+                        append(
+                            "ID: $id, Question Title: $questionTitle, " +
+                                    "Question Body: $questionBody, Hint: $hint, " +
+                                    "Answer Title: $answerTitle, Answer Body: $answerBody, " +
+                                    "Category: $category\n"
+                        )
                     }
                 }
 

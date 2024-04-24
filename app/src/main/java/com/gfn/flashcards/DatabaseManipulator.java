@@ -6,14 +6,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseManipulator extends SQLiteOpenHelper{
 
-    private static final String DB_NAME = "coursedb";
+    private static final String DB_NAME = "flashcarddb";
     private static final int DB_VERSION = 1;
-    private static final String TABLE_NAME = "mycourses";
-    private static final String ID_COL = "id";
-    private static final String NAME_COL = "name";
-    private static final String DURATION_COL = "duration";
-    private static final String DESCRIPTION_COL = "description";
-    private static final String TRACKS_COL = "tracks";
+    private static final String TABLE_NAME = "cards";
+    private static final String ID_COL = "card_id";
+    private static final String QUESTION_TITLE_COL = "question_title";
+    private static final String QUESTION_BODY_COL = "question_body";
+    private static final String HINT_COL = "hint";
+    private static final String ANSWER_TITLE_COL = "answer_title";
+    private static final String ANSWER_BODY_COL = "answer_body";
+    private static final String CATEGORY_COL = "category";
 
     public DatabaseManipulator(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -23,20 +25,25 @@ public class DatabaseManipulator extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + NAME_COL + " TEXT, "
-                + DURATION_COL + " TEXT, "
-                + DESCRIPTION_COL + " TEXT, "
-                + TRACKS_COL + " TEXT)";
+                + QUESTION_TITLE_COL + " VARCHAR(255), "
+                + QUESTION_BODY_COL + " TEXT, "
+                + HINT_COL + " TEXT, "
+                + ANSWER_TITLE_COL + " VARCHAR(255), "
+                + ANSWER_BODY_COL + " TEXT, "
+                + CATEGORY_COL + " VARCHAR(255))";
 
         db.execSQL(query);
     }
 
-    public void addCourse(SQLiteDatabase db, String courseName, String courseDuration, String courseDescription, String courseTracks) {
+    public void addCard(SQLiteDatabase db, String questionTitle, String questionBody, String hint,
+                        String answerTitle, String answerBody, String category) {
         ContentValues values = new ContentValues();
-        values.put(NAME_COL, courseName);
-        values.put(DURATION_COL, courseDuration);
-        values.put(DESCRIPTION_COL, courseDescription);
-        values.put(TRACKS_COL, courseTracks);
+        values.put(QUESTION_TITLE_COL, questionTitle);
+        values.put(QUESTION_BODY_COL, questionBody);
+        values.put(HINT_COL, hint);
+        values.put(ANSWER_TITLE_COL, answerTitle);
+        values.put(ANSWER_BODY_COL, answerBody);
+        values.put(CATEGORY_COL, category);
 
         db.insert(TABLE_NAME, null, values);
     }
