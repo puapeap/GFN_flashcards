@@ -13,13 +13,23 @@ public class ConcreteCardDeck implements CardDeckInterface {
     private String cardDeckCategory = "DefaultCardDeck";
 
     public ConcreteCardDeck(Context context){
-        // Initialize the database manipulator
-        databaseManipulator = new DatabaseManipulator(context);
+        try {
+            // Initialize the database manipulator and get a writable database instance
+            databaseManipulator = new DatabaseManipulator(context);
+            db = databaseManipulator.getWritableDatabase();
 
-        // Get a writable database instance
-        db = databaseManipulator.getWritableDatabase();
+            // Retrieve cards for the specified category
+            cardList = databaseManipulator.getCardsByCategory(db, cardDeckCategory);
 
-        cardList = databaseManipulator.getCardsByCategory(db, cardDeckCategory);
+            closeDb();
+
+            numberOfCards = cardList.size();
+            this.sortCardsBySuccessRate();
+
+        } catch (Exception e) {
+            cardList = new ArrayList<>();
+        }
+
 
         // this is just for testing, need to save cards somewhere and load them when initializing
         /*cardList.add(new Card(
@@ -52,10 +62,6 @@ public class ConcreteCardDeck implements CardDeckInterface {
                 0.6f));
         cardList.add(databaseManipulator.getCardById(db, 1));*/
 
-        closeDb();
-
-        numberOfCards = cardList.size();
-        this.sortCardsBySuccessRate();
     }
 
     @Override

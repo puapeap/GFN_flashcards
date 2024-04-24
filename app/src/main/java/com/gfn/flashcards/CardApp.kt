@@ -38,12 +38,12 @@ fun CardApp(
     val cardService = ConcreteCardDeck(context)
 
     var cardId: Int by rememberSaveable { mutableIntStateOf(0) }
-    val numberOfCards: Int = cardService.getNumberOfCards()
-    var questionTitle: String by rememberSaveable { mutableStateOf(cardService.getQuestionTitle(cardId))}
-    var questionBody: String by rememberSaveable { mutableStateOf(cardService.getQuestionBody(cardId))}
-    var hintText: String by rememberSaveable { mutableStateOf( cardService.getHintText(cardId))}
-    var answerTitle: String by rememberSaveable { mutableStateOf( cardService.getAnswerTitle(cardId))}
-    var answerBody: String by rememberSaveable { mutableStateOf( cardService.getAnswerBody(cardId))}
+    var numberOfCards: Int by rememberSaveable { mutableStateOf( cardService?.getNumberOfCards() ?: 0)}
+    var questionTitle: String by rememberSaveable { mutableStateOf(cardService?.getQuestionTitle(cardId) ?: "Test")}
+    var questionBody: String by rememberSaveable { mutableStateOf(cardService?.getQuestionBody(cardId)?:"Test")}
+    var hintText: String by rememberSaveable { mutableStateOf( cardService?.getHintText(cardId)?:"Test")}
+    var answerTitle: String by rememberSaveable { mutableStateOf( cardService?.getAnswerTitle(cardId)?:"Test")}
+    var answerBody: String by rememberSaveable { mutableStateOf( cardService?.getAnswerBody(cardId)?:"Test")}
 
     var revealed = false // true means answer has been shown
     var flipped by rememberSaveable { mutableStateOf(false) } // true means showing the answer

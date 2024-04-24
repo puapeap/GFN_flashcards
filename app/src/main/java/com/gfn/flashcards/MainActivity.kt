@@ -88,7 +88,7 @@ fun ScaffoldContent() {
 
 @Preview(showBackground = true)
 @Composable
-fun CardPreview() {
+fun CardAppPreview() {
     FlashcardsTheme {
         CardApp(onBackToMenuClicked = {})
     }
@@ -97,7 +97,7 @@ fun CardPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun OnboardingPreview() {
+fun MenuPreview() {
     FlashcardsTheme {
         Menu(onContinueClicked = {})
     }
