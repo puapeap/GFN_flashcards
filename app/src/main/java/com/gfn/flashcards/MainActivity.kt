@@ -94,6 +94,22 @@ fun CardAppPreview() {
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun NewCardPreview() {
+    FlashcardsTheme {
+        NewCard(onNewCardSaved = {})
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CardEditorPreview() {
+    FlashcardsTheme {
+        CardEditor(1)
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
