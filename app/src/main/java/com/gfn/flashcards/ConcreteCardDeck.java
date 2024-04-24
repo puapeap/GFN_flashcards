@@ -1,13 +1,28 @@
 package com.gfn.flashcards;
 import java.util.ArrayList;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 public class ConcreteCardDeck implements CardDeckInterface {
     private int numberOfCards = 0;
-    private ArrayList<Card> cardList = new ArrayList<>();
+    private ArrayList<Card> cardList;
 
-    public ConcreteCardDeck(){
+    private DatabaseManipulator databaseManipulator;
+    private SQLiteDatabase db;
+
+    private String cardDeckCategory = "DefaultCardDeck";
+
+    public ConcreteCardDeck(Context context){
+        // Initialize the database manipulator
+        databaseManipulator = new DatabaseManipulator(context);
+
+        // Get a writable database instance
+        db = databaseManipulator.getWritableDatabase();
+
+        cardList = databaseManipulator.getCardsByCategory(db, cardDeckCategory);
+
         // this is just for testing, need to save cards somewhere and load them when initializing
-        cardList.add(new Card(
+        /*cardList.add(new Card(
                 "What is the difference between == and .equals() in Java?",
                 "(When used on objects)",
                 "hintText0",
@@ -35,6 +50,10 @@ public class ConcreteCardDeck implements CardDeckInterface {
                 "answerTitle3",
                 "answerBody3",
                 0.6f));
+        cardList.add(databaseManipulator.getCardById(db, 1));*/
+
+        closeDb();
+
         numberOfCards = cardList.size();
         this.sortCardsBySuccessRate();
     }
@@ -104,5 +123,12 @@ public class ConcreteCardDeck implements CardDeckInterface {
     public void sortCardsBySuccessRate(){
         // Sort the ArrayList by successRate in ascending order
         cardList.sort((c1, c2) -> Float.compare(c1.getSuccessRate(), c2.getSuccessRate()));
+    }
+
+    public void closeDb() {
+        // Close the database to prevent resource leaks
+        if (db != null && db.isOpen()) {
+            db.close();
+        }
     }
 }

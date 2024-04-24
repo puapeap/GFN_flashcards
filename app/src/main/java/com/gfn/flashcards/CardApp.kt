@@ -20,13 +20,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-// import Java classes
 
 // This is a comment
 @Composable
@@ -35,7 +34,8 @@ fun CardApp(
     modifier: Modifier = Modifier
 ) {
     // Java deck object
-    val cardService = ConcreteCardDeck()
+    val context = LocalContext.current
+    val cardService = ConcreteCardDeck(context)
 
     var cardId: Int by rememberSaveable { mutableIntStateOf(0) }
     val numberOfCards: Int = cardService.getNumberOfCards()
