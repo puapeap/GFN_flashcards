@@ -48,8 +48,7 @@ public class Card {
         return questionBody;
     }
 
-    public void setQuestionBody(String questionBody) {
-        this.questionBody = questionBody;
+    public void setQuestionBody(String questionBody) {this.questionBody = questionBody;
     }
 
     // Getter and Setter for hintText

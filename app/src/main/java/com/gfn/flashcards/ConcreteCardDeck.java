@@ -102,7 +102,6 @@ public class ConcreteCardDeck implements CardDeckInterface {
     }
     @Override
     public void sortCardsBySuccessRate(){
-        // implement logic
         // Sort the ArrayList by successRate in ascending order
         cardList.sort((c1, c2) -> Float.compare(c1.getSuccessRate(), c2.getSuccessRate()));
     }
