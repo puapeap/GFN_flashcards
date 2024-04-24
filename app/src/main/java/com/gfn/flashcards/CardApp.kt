@@ -35,7 +35,7 @@ fun CardApp(
     modifier: Modifier = Modifier
 ) {
     // Java deck object
-    val cardService = ConcreteCardBackend()
+    val cardService = ConcreteCardDeck()
 
     var cardId: Int by rememberSaveable { mutableIntStateOf(0) }
     val numberOfCards: Int = cardService.getNumberOfCards()

@@ -1,6 +1,6 @@
 package com.gfn.flashcards;
 
-public interface CardBackend {
+public interface CardDeckInterface {
     public String getQuestionTitle(int cardIndex);
 
     public String getQuestionBody(int cardIndex);

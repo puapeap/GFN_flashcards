@@ -1,12 +1,11 @@
 package com.gfn.flashcards;
 import java.util.ArrayList;
-import java.util.Comparator;
 
-public class ConcreteCardBackend implements CardBackend {
+public class ConcreteCardDeck implements CardDeckInterface {
     private int numberOfCards = 0;
     private ArrayList<Card> cardList = new ArrayList<>();
 
-    public ConcreteCardBackend(){
+    public ConcreteCardDeck(){
         // this is just for testing, need to save cards somewhere and load them when initializing
         cardList.add(new Card(
                 "What is the difference between == and .equals() in Java?",
