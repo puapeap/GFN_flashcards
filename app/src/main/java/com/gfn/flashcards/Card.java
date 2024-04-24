@@ -4,10 +4,14 @@ public class Card {
     //Datenklasse, Komposition in ConcreteCardBackend
 
     private String questionTitle;
+
+    private int databaseCardId;
+
     private String questionBody;
     private String hintText;
     private String answerTitle;
     private String answerBody;
+    private String imagePath;
     private int correctAnswers = 0;
     private int wrongAnswers = 0;
     private float successRate = 0.0f;

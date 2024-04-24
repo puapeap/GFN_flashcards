@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun NewCard(){
+    val databaseService = DatabaseManipulator()
     var text1 by rememberSaveable { mutableStateOf("") }
     var text2 by rememberSaveable { mutableStateOf("") }
     var text3 by rememberSaveable { mutableStateOf("") }
@@ -50,5 +52,14 @@ fun NewCard(){
             onValueChange = { text4 = it },
             label = { Text("Enter Answer Body") }
         )
+        ElevatedButton(
+            onClick = {},
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
+            Text("Save New Card")
+        }
+
+
     }
 }
