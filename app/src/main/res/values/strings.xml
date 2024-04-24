@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">flashcards</string>
+    <string name="reveal_solution">reveal solution</string>
+    <string name="show_question">show question</string>
+
+    <string name="question_title">Which is more precise?</string>
+    <string name="question_body">float or double</string>
+    <string name="answer_title">Double is more precise than float.</string>
+    <string name="answer_body">A float typically uses 32 bits to represent a number, while a double uses 64 bits.</string>
+</resources>
