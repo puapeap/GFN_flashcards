@@ -54,4 +54,9 @@ public class DatabaseManipulator extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
+
+    // New method to delete the database
+    public void deleteDatabase(Context context) {
+        context.deleteDatabase(DB_NAME);
+    }
 }

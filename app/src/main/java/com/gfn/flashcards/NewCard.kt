@@ -23,6 +23,9 @@ import androidx.compose.ui.platform.LocalContext
 fun NewCard(){
     val context = LocalContext.current
     val databaseService = DatabaseManipulator(context)
+
+    //databaseService.deleteDatabase(context)
+
     var displayText by rememberSaveable { mutableStateOf("No data") }
 
 
@@ -59,7 +62,51 @@ fun NewCard(){
             label = { Text("Enter Answer Body") }
         )
         ElevatedButton(
-            onClick = {},
+            onClick = {
+                val db = databaseService.writableDatabase  // Get writable database
+
+                // Ensure the table is created
+                databaseService.onCreate(db)
+
+                // Add a sample course
+                databaseService.addCard(
+                    db,
+                    text1,
+                    text2,
+                    "",
+                    text3,
+                    text4,
+                    "DefaultCardDeck",
+                )
+
+                // Retrieve the data from the database (this is just to test if it worked)
+                val cursor = db.rawQuery("SELECT * FROM cards", null)
+
+                val data = buildString {
+                    while (cursor.moveToNext()) {
+                        val id = cursor.getInt(cursor.getColumnIndexOrThrow("card_id"))
+                        val questionTitle = cursor.getString(cursor.getColumnIndexOrThrow("question_title"))
+                        val questionBody = cursor.getString(cursor.getColumnIndexOrThrow("question_body"))
+                        val hint = cursor.getString(cursor.getColumnIndexOrThrow("hint"))
+                        val answerTitle = cursor.getString(cursor.getColumnIndexOrThrow("answer_title"))
+                        val answerBody = cursor.getString(cursor.getColumnIndexOrThrow("answer_body"))
+                        val category = cursor.getString(cursor.getColumnIndexOrThrow("category"))
+
+                        append(
+                            "ID: $id, Question Title: $questionTitle, " +
+                                    "Question Body: $questionBody, Hint: $hint, " +
+                                    "Answer Title: $answerTitle, Answer Body: $answerBody, " +
+                                    "Category: $category\n"
+                        )
+                    }
+                }
+
+                displayText = if (data.isNotEmpty()) data else "No data"  // Update display text
+
+                cursor.close()  // Close cursor
+                db.close()  // Close database
+
+            },
             modifier = Modifier
                 .padding(16.dp)
         ) {
@@ -67,7 +114,7 @@ fun NewCard(){
         }
 
         // Button to create and test the database
-        ElevatedButton(
+        /*ElevatedButton(
             onClick = {
                 val db = databaseService.writableDatabase  // Get writable database
 
@@ -115,7 +162,7 @@ fun NewCard(){
             modifier = Modifier.padding(16.dp)
         ) {
             Text("Create and Test Database")
-        }
+        }*/
 
         // Display the results of database operations
         Text(
