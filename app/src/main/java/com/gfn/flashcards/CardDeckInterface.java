@@ -17,5 +17,7 @@ public interface CardDeckInterface {
 
     public int getNumberOfCards();
 
+    public void addNewCard(String questionTitle, String questionBody, String hintText, String answerTitle, String answerBody);
+
     public void sortCardsBySuccessRate();
 }

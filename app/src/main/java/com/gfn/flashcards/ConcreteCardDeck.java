@@ -106,5 +106,16 @@ public class ConcreteCardDeck implements CardDeckInterface {
         // Sort the ArrayList by successRate in ascending order
         cardList.sort((c1, c2) -> Float.compare(c1.getSuccessRate(), c2.getSuccessRate()));
     }
+    @Override
+    public void addNewCard(String questionTitle, String questionBody, String hintText, String answerTitle, String answerBody){
+        cardList.add(new Card(
+                questionTitle,
+                questionBody,
+                hintText,
+                answerTitle,
+                answerBody,
+                0.6f));
+        // add logic for saving card in a database
+    }
 
 }
