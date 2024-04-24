@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 
 // import Java classes
 
-
+// This is a comment
 @Composable
 fun CardApp(
     onBackToMenuClicked: () -> Unit,
