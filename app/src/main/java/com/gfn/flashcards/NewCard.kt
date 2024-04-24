@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-fun NewCard(){
+fun NewCard(onNewCardSaved: () -> Unit,){
     val context = LocalContext.current
     val databaseService = DatabaseManipulator(context)
 
@@ -111,6 +111,10 @@ fun NewCard(){
                 .padding(16.dp)
         ) {
             Text("Save New Card")
+        }
+
+        ElevatedButton(onClick = { onNewCardSaved() }) {
+            Text(text = "Go Back")
         }
 
         // Button to create and test the database

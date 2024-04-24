@@ -80,7 +80,7 @@ fun ScaffoldContent() {
                 .padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            if(addCardClicked) NewCard() else MyApp()
+            if(addCardClicked) NewCard(onNewCardSaved = {addCardClicked = false}) else MyApp()
         }
     }
 }
