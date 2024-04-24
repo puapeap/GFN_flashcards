@@ -4,9 +4,7 @@ public class Card {
     //Datenklasse, Komposition in ConcreteCardBackend
 
     private String questionTitle;
-
     private int databaseCardId;
-
     private String questionBody;
     private String hintText;
     private String answerTitle;
